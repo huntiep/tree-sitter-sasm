@@ -1,0 +1,10 @@
+(define message "Hello, world\n")
+(addi x10 x0 1)
+(la x11 message)
+(addi x12 x0 (len message))
+(addi x17 x0 64)
+(ecall)
+
+(addi x10 x0 0)
+(addi x17 x0 93)
+(ecall)
