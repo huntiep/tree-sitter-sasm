@@ -39,7 +39,7 @@ module.exports = grammar({
         character: $ => seq('#', '\'', choice($.escape_sequence, /[^'\\]/), '\''),
         string: $ => seq('"', repeat(choice($.escape_sequence, /[^"\\]+/)), '"'),
 
-        escape_sequence: _ => seq("\\", /[tnr'"\\]/),
+        escape_sequence: _ => seq("\\", /[0tnr'"\\]/),
 
         symbol: _ => token(hidden_node.symbol),
 

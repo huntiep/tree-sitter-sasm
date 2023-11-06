@@ -275,12 +275,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\'') ADVANCE(11);
       if (lookahead == '(') ADVANCE(18);
       if (lookahead == ')') ADVANCE(19);
+      if (lookahead == '0') ADVANCE(8);
       if (lookahead == ';') ADVANCE(7);
       if (lookahead == '\\') ADVANCE(15);
       if (lookahead == 'n' ||
           lookahead == 'r' ||
           lookahead == 't') ADVANCE(12);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(8);
+      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(8);
       if (aux_sym__intertoken_token1_character_set_1(lookahead)) ADVANCE(6);
       if (lookahead != 0) ADVANCE(12);
       END_STATE();
@@ -297,6 +298,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 3:
       if (lookahead == '"' ||
           lookahead == '\'' ||
+          lookahead == '0' ||
           lookahead == '\\' ||
           lookahead == 'n' ||
           lookahead == 'r' ||
