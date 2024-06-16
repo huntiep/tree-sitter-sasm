@@ -1,5 +1,47 @@
 [
   {
+    "type": "array",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "block_comment",
+          "named": true
+        },
+        {
+          "type": "character",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "block_comment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "block_comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "character",
     "named": true,
     "fields": {},
@@ -28,6 +70,14 @@
       "required": false,
       "types": [
         {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "block_comment",
+          "named": true
+        },
+        {
           "type": "character",
           "named": true
         },
@@ -55,6 +105,11 @@
     }
   },
   {
+    "type": "number",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "program",
     "named": true,
     "fields": {},
@@ -62,6 +117,14 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "block_comment",
+          "named": true
+        },
         {
           "type": "character",
           "named": true
@@ -109,7 +172,15 @@
     "named": false
   },
   {
-    "type": "#",
+    "type": "#'",
+    "named": false
+  },
+  {
+    "type": "#(",
+    "named": false
+  },
+  {
+    "type": "#|",
     "named": false
   },
   {
@@ -133,11 +204,15 @@
     "named": true
   },
   {
-    "type": "number",
-    "named": true
+    "type": "define",
+    "named": false
   },
   {
     "type": "symbol",
     "named": true
+  },
+  {
+    "type": "|#",
+    "named": false
   }
 ]

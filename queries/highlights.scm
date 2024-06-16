@@ -5,4 +5,5 @@
 (string) @string
 (escape_sequence) @escape
 (comment) @comment
+(block_comment) @comment
 (symbol) @variable

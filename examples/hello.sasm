@@ -1,4 +1,19 @@
-(define message "Hello, world\n")
+#|
+(define arr #(1 2 3 #'a'))
+(addi x10 x0 0b101)
+#|
+(addi x10 x0 -0b101)
+|#
+(addi x10 x0 +0b101)
+(addi x10 x0 0o123)
+(addi x10 x0 +0o123)
+(addi x10 x0 -0o123)
+(addi x10 x0 0x123)
+(addi x10 x0 +0x123)
+(addi x10 x0 -0x123)
+|#
+(addi x10 x0 0xabc)
+(defcon message "Hello, world\n")
 (addi x10 x0 1)
 (la x11 message)
 (addi x12 x0 (len message))

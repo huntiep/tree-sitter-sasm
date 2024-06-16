@@ -24,25 +24,55 @@ module.exports = grammar({
         _token: $ => choice($._intertoken, $._datum),
 
         _intertoken: $ => choice(
-            token(repeat1(common.whitespace)), $.comment),
+            token(repeat1(common.whitespace)),
+            $.comment,
+            $.block_comment),
 
         comment: $ => /;.*/,
+
+        block_comment: $ => seq("#|",
+                                optional(repeat(choice(PREC.first($.block_comment), common.any_char))),
+                                PREC.first("|#")),
 
         _datum: $ => choice(
             $.character,
             $.string,
-            $.number,
+            prec(100, $.number),
             $.symbol,
+            $.array,
+            //$.define,
+            //$.defcon,
+            //$.defvar,
+            //$.include,
             $.list),
 
-        number: _ => token(repeat1(/[0-9]/)),
-        character: $ => seq('#', '\'', choice($.escape_sequence, /[^'\\]/), '\''),
+        number: $ => seq(optional(/[+-]/),
+                               choice(/0x[0-9a-fA-F_]+/,
+                                      /0o[0-7_]+/,
+                                      /0b[01_]+/,
+                                      /[0-9][0-9_]*/)),
+
+        character: $ => seq("#'", choice($.escape_sequence, /[^'\\]/), '\''),
+
         string: $ => seq('"', repeat(choice($.escape_sequence, /[^"\\]+/)), '"'),
 
         escape_sequence: _ => seq("\\", /[0tnr'"\\]/),
 
-        symbol: _ => token(hidden_node.symbol),
+        symbol: _ => token(repeat1(common.symbol_element)),
 
+        array: $ => seq('#(', repeat(choice($._intertoken, $.number, $.character)), ')'),
+
+        define: $ => seq(
+            '(',
+            "define",
+            $.symbol,
+            choice($.number, $.character),
+            ')'
+        ),
+
+        //defcon: $ => seq('(', repeat($._intertoken), "defcon", repeat($._intertoken), $.symbol, repeat($._intertoken), choice($.string, $.array), repeat($._intertoken), ')'),
+        //defvar: $ => seq('(', repeat($._intertoken), "defvar", repeat($._intertoken), $.symbol, repeat($._intertoken), choice($.string, $.array), repeat($._intertoken), ')'),
+        //include: $ => seq('(', repeat($._intertoken), "include!", repeat($._intertoken), $.string, repeat($._intertoken), ')'),
         list: $ => seq('(', repeat($._token), ')'),
     },
 });
